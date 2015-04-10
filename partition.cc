@@ -21,10 +21,19 @@
 Partition::Partition(Mesh *mesh, std::map <int, int> _physmap) {
     map_physpart   = _physmap;
 
-    // Find out the number of partitions.
-    num_partitions = (*std::max_element(map_physpart.begin(), map_physpart.end(),
-                                        map_physpart.value_comp())).second + 1;
+    num_partitions = 0;
+    for (std::map<int, int>::iterator it = _physmap.begin();
+         it != _physmap.end(); ++it) {
+        int physical  = it->first;
+        int part = it->second;
 
+        num_partitions = std::max(num_partitions, part+1);
+    }
+
+    // Find out the number of partitions.
+/*    num_partitions = (*std::max_element(map_physpart.begin(), map_physpart.end(),
+                                        map_physpart.value_comp())).second + 1;
+*/
     parts_left.reserve (num_partitions*num_partitions);
     parts_right.reserve(num_partitions*num_partitions);
 
@@ -42,6 +51,8 @@ Partition::Partition(Mesh *mesh, std::map <int, int> _physmap) {
             map_nodephys[node] = elem->physical;
         }
     }
+
+
     for (unsigned int ind_line = 0; ind_line < mesh->num_lines; ind_line++) {
         Mesh_Element *elem = mesh->elements[mesh->lines[ind_line]];
 
@@ -57,6 +68,7 @@ Partition::Partition(Mesh *mesh, std::map <int, int> _physmap) {
     for (unsigned int ind_node = 0; ind_node < mesh->num_nodes; ind_node++) {
         int phys = map_nodephys[ind_node];
         int part = map_physpart[phys];
+        std::cout << phys << " " << part << "/" << num_partitions<<std::endl;
         node_parts[part].push_back(ind_node);
     }
 

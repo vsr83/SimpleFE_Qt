@@ -6,7 +6,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = simpleFE
 TEMPLATE = app
 INCLUDEPATH += /usr/include/eigen3
-QMAKE_CXXFLAGS = -O3 -DEIGEN_DONT_VECTORIZE -DEIGEN_DONT_ALIGN
+QMAKE_CXXFLAGS = -O2 -DEIGEN_DONT_VECTORIZE -DEIGEN_DONT_ALIGN
 
 SOURCES += main.cpp\
         mainwindow.cpp \
