@@ -1,14 +1,9 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2015-04-01T12:03:13
-#
-#-------------------------------------------------
 
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = PostProc
+TARGET = simpleFE
 TEMPLATE = app
 INCLUDEPATH += /usr/include/eigen3
 QMAKE_CXXFLAGS = -O3 -DEIGEN_DONT_VECTORIZE -DEIGEN_DONT_ALIGN
