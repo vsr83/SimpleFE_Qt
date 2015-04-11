@@ -33,3 +33,4 @@ and main.cpp:
 - Files physlist.cpp and physlist.h implement a QWidget based on QTableWidget
   for the mainpulation of material parameters and source currents.
 
+![ScreenShot](https://raw.github.com/vsr83/simpleFE_Qt/master/simpleFE.png)
