@@ -47,7 +47,9 @@ Assembly::Assembly(Mesh *_mesh, int _num_gauss, std::map <int, Region> &_regions
          Mesh_Element *elem = mesh->elements[ind_elem];
 
          // Find the corner nodes of the triangles.
-         double x[elem->nnodes], y[elem->nnodes], z[elem->nnodes];         
+         double *x = new double[elem->nnodes],
+                *y = new double[elem->nnodes],
+                *z = new double[elem->nnodes];
          for (unsigned int ind_node=0; ind_node<elem->nnodes; ind_node++) {
              int nodenum = elem->nodes[ind_node];
 
@@ -59,6 +61,9 @@ Assembly::Assembly(Mesh *_mesh, int _num_gauss, std::map <int, Region> &_regions
          }
         Element *element = new Element(*elem, x, y);
         elements.push_back(element);
+        delete [] x;
+        delete [] y;
+        delete [] z;
     }
 
     // Tabulate values of the basis functions and their gradients at Gauss
